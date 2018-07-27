@@ -7,8 +7,8 @@ import copy
 import numpy
 import json
 
-file_route = '/Users/user/Documents/Cities/india_air_links_weighted/airline_routes_schedule.csv'
-file_capacity = '/Users/user/Documents/Cities/india_air_links_weighted/aircraft_capacities.csv'
+file_route = '/Users/user/Documents/Cities/india_air_links_weighted/air_links_india/airline_routes_schedule.csv'
+file_capacity = '/Users/user/Documents/Cities/india_air_links_weighted/air_links_india/aircraft_capacities.csv'
 df = pd.read_csv(file_route)
 capacity_df = pd.read_csv(file_capacity)
 serial = df['Sl. No.'].tolist()
@@ -57,7 +57,7 @@ def trip_capacity(row):
 
 routes_df['weekly_capacity'] = routes_df.apply(lambda row: trip_capacity(row),axis=1)
 
-lnglatiata_df = pd.read_csv('/Users/user/Documents/Cities/india_air_links_weighted/lnglatiata.csv')
+lnglatiata_df = pd.read_csv('/Users/user/Documents/Cities/india_air_links_weighted/air_links_india/lnglatiata.csv')
 
 def dupe_check(row):
     if str(row['arr']) == 'nan':
@@ -101,7 +101,7 @@ for route in clean['dupe_check']:
     count = count + 1
 
 f_geojson_df = pd.DataFrame(f_geojson)
-f_geojson_df.to_csv('/Users/user/Documents/Cities/india_air_links_weighted/for_geojson.csv')
+f_geojson_df.to_csv('/Users/user/Documents/Cities/india_air_links_weighted/air_links_india/for_geojson.csv')
 
 llidf = lnglatiata_df
 fgj = f_geojson_df
@@ -128,7 +128,9 @@ for row in range(0,len(fgj.index.tolist())):
         'type': 'Feature',
         'properties':{
             'rcs': str(fgj.iloc[row,6]),
-            'twc': int(fgj.iloc[row,7])
+            'twc': int(fgj.iloc[row,7]),
+            'air1': str(fgj.iloc[row,0]),
+            'air2': str(fgj.iloc[row,3])
             },
  	'geometry': {
             'type': 'LineString',
@@ -140,7 +142,7 @@ for row in range(0,len(fgj.index.tolist())):
          }
     })
 
-with open('/Users/user/Documents/Cities/india_air_links_weighted/air_links_t2.geojson', 'w') as f:
+with open('/Users/user/Documents/Cities/india_air_links_weighted/air_links_india/air_links_t2.geojson', 'w') as f:
     f.write(json.dumps(geojson))
 
 
