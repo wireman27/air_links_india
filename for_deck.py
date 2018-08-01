@@ -18,7 +18,7 @@ for row in range(totRows):
     
     entry1 = dict()
     entry1["outbound"] = data.iloc[row,8].item()
-    entry1["rcs"] = data.iloc[row,7]
+    entry1["rcs"] = str(data.iloc[row,7])
     entry1['from'] = {
         "name":data.iloc[row,1],
         "coordinates":[
@@ -46,7 +46,7 @@ for row in range(totRows):
        
        entry2["outbound"] = inv.iloc[0,8].item()
        entry2["inbound"] = data.iloc[row,8].item()
-       entry2["rcs"] = inv.iloc[0,7]
+       entry2["rcs"] = str(inv.iloc[0,7])
        
        entry2['from'] = {
            "name":inv.iloc[0,1],
